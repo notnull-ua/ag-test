@@ -20,6 +20,8 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    public $imageFiles;
+
     /**
      * @inheritdoc
      */
@@ -34,13 +36,14 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'age', 'height', 'weight', 'city', 'credit', 'english', 'photos'], 'required'],
+            [['name', 'email', 'age', 'height', 'weight', 'city', 'credit', 'english'], 'required'],
             [['age'], 'integer'],
             [['height', 'weight'], 'number'],
-            [['credit', 'english', 'photos'], 'string'],
+            [['credit', 'english'], 'string'],
             [['name', 'email'], 'string', 'max' => 30],
             [['city'], 'string', 'max' => 60],
             [['email'], 'unique'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 5],
         ];
     }
 
@@ -51,15 +54,29 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Имя',
             'email' => 'Email',
-            'age' => 'Age',
-            'height' => 'Height',
-            'weight' => 'Weight',
-            'city' => 'City',
-            'credit' => 'Credit',
-            'english' => 'English',
-            'photos' => 'Photos',
+            'age' => 'Возраст',
+            'height' => 'Рост',
+            'weight' => 'Вес',
+            'city' => 'Город',
+            'credit' => 'Нужна ли техника в кредит',
+            'english' => 'Знание английского',
+            'photos' => 'Добавить фото',
         ];
+    }
+
+    public function upload(){
+        $images = [];
+        if($this->validate(['imageFiles'])){
+            foreach ($this->imageFiles as $file) {
+                $file->saveAs('images/uploads/' . $file->baseName . '.' . $file->extension);
+                $images[]=$file->baseName.'.'.$file->extension;
+            }
+            $this->photos = implode('|',$images);
+            return true;
+        }
+        else return false;
+
     }
 }

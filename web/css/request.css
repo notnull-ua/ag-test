@@ -1,0 +1,106 @@
+body {
+    background: url("../images/background.jpg") repeat;
+    font-family: 'Roboto', sans-serif;
+}
+form {
+    background: #ffffff;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+form .form-control{
+border-radius:0 ;
+    padding-left: 40px;
+}
+.content-header {
+    text-align: center;
+}
+.content-header .logo {
+    width: 50px;
+    height: 50px;
+}
+.content-header .title {
+font-weight:bold ;
+}
+.content-header .description {
+    color: #aeaeae;
+    font-size: 20px;
+}
+form .name-wrapper:before {
+      content: ' ';
+      background: url("../images/name.jpg");
+      width: 21px;
+      height:27px;
+      display: block;
+      position: absolute;
+      left:25px;
+      top:5px;
+      z-index: 1;
+  }
+form .email-wrapper:before {
+    content: ' ';
+    background: url("../images/email.jpg")no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height:27px;
+    display: block;
+    position: absolute;
+    left:25px;
+    top:5px;
+    z-index: 1;
+}
+form .age-wrapper:before {
+     content: ' ';
+     background: url("../images/age.jpg")no-repeat;
+     background-size: 100%;
+     width: 21px;
+     height:27px;
+     display: block;
+     position: absolute;
+     left:25px;
+     top:5px;
+     z-index: 1;
+ }
+form .height-wrapper:before {
+    content: ' ';
+    background: url("../images/height.jpg")no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height:27px;
+    display: block;
+    position: absolute;
+    left:25px;
+    top:5px;
+    z-index: 1;
+}
+form .weight-wrapper:before {
+    content: ' ';
+    background: url("../images/weight.jpg") no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height:27px;
+    display: block;
+    position: absolute;
+    left:25px;
+    top:5px;
+    z-index: 1;
+}
+form .city-wrapper:before {
+    content: ' ';
+    background: url("../images/city.jpg") no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height:27px;
+    display: block;
+    position: absolute;
+    left:25px;
+    top:5px;
+    z-index: 1;
+}
+
+#post-credit {
+    display: flex;
+}
+#post-english {
+    display: flex;
+}

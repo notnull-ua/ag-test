@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Post;
+use yii\web\UploadedFile;
+
 class RequestController extends \yii\web\Controller
 {
     public function actionIndex()
@@ -10,15 +13,35 @@ class RequestController extends \yii\web\Controller
         $model = new \app\models\Post();
 
         if ($model->load(\Yii::$app->request->post())) {
+            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
             if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
+                $model->upload();
+                $model->save(false);
+                \Yii::$app->session->setFlash('success','Запрос успешно отправлен');
+                return $this->render('index',[
+                    'model'=>$model
+                ]);
+            }
+            else {
+                \Yii::$app->session->setFlash('error','Ошибка при отправлении запроса. Проверьте данные и повторите попытку');
             }
         }
 
         return $this->render('index', [
             'model' => $model,
         ]);
+    }
+
+    public function  actionUploadImages(){
+        $model = new Post();
+        if(\Yii::$app->request->isPjax && $model->load(\Yii::$app->request->post())){
+            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+            if ($model->upload()) {
+                return $this->renderAjax('index',[
+                    'model' => $model
+                ]);
+            }
+        }
     }
 
 }

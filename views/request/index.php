@@ -2,15 +2,22 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
 ?>
-<h1>/request/index</h1>
-
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
 
 <?php
+\yii\widgets\Pjax::begin();
+echo \app\widgets\Alert::widget();
+?>
+<div class="content-header">
+    <img src="images/feedback-logo.jpg" class="logo" alt="logo">
+    <h1 class="title">Подать заявку</h1>
+    <p class="description">Все поля обязательны для заполнения. Заявка приходит на имейл.</p>
+</div>
+
+<?php
+
 echo $this->render('_form',[
         'model'=>$model
-])
+]);
+
+\yii\widgets\Pjax::end();
 ?>
