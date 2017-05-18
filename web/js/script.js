@@ -3,50 +3,80 @@
  */
 
 $().ready(function () {
-    $('.radio').on('change','input[type="radio"]',function () {
+    $('.radio').on('change', 'input[type="radio"]', function () {
         console.log($(this).parents('.form-group'));
         $(this).parents('.form-group').find('label').removeClass('checked');
         $(this).parent('label').addClass('checked');
     });
-    // /*$('#uploadform-imagefiles').on('change',function () {
-    //     event.preventDefault();
-    //     var data = new FormData(this.name);
-    //     $.each( this.files, function( key, value ){
-    //         data.append(key, value );
-    //     });
-    //
-    //     $.ajax({
-    //         url: './request/upload-images',
-    //         type: 'POST',
-    //         data: data,
-    //         cache: false,
-    //         dataType: 'json',
-    //         processData: false, // Не обрабатываем файлы (Don't process the files)
-    //         contentType: false, // Так jQuery скажет серверу что это строковой запрос
-    //         success: function( respond, textStatus, jqXHR ){
-    //
-    //             // Если все ОК
-    //
-    //             if( typeof respond.error === 'undefined' ){
-    //                 // Файлы успешно загружены, делаем что нибудь здесь
-    //
-    //                 // выведем пути к загруженным файлам в блок '.ajax-respond'
-    //
-    //                 var files_path = respond.files;
-    //                 var html = '';
-    //                 $.each( files_path, function( key, val ){ html += val +'<br>'; } )
-    //                 $('.ajax-respond').html( html );
-    //             }
-    //             else{
-    //                 console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
-    //             }
-    //         },
-    //         error: function( jqXHR, textStatus, errorThrown ){
-    //             console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-    //         }
-    //     });
-    // });*/
+    console.log($('form'));
+    $('form').on('submit', function () {
+        event.preventDefault();
+        var data = new FormData(this);
+        //data.append(this.name,this.files);
+        // $.each( this.files, function( key, value ){
+        //     data.append(key, value );
+        // });
+
+        $.ajax({
+            url: './request/upload-images',
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (respond, textStatus, jqXHR) {
+
+                if (typeof respond.error === 'undefined') {
+
+                    $('#post-photos').val(respond);
+                    var images = respond.split('|');
+                    updatePreview(images);
+
+                }
+                else {
+                    console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('ОШИБКИ AJAX запроса: ' + textStatus);
+            }
+        });
+    });
+
+    $('.gallery').on('click', '.preview', function () {
+        var item = $(this);
+        if (item.attr('data-key') != undefined) {
+            $.get('./request/delete-image', {name: item.attr('data-key')})
+                .done(function (data) {
+                    var images = $('#post-photos').val().split('|'); //get images from hidden input
+                    images.splice(images.indexOf(item.attr('data-key'))); // delete image from array images
+                    updatePreview(images); //update preview
+                    var imageString = images.join('|');
+                    $('#post-photos').val(imageString); //set new value to hidden input
 
 
+
+
+                });
+            alert("Delete " + item.attr('data-key'));
+        }
+    });
+
+    function updatePreview(images) {
+        var preview = $('.preview');
+        preview.removeAttr('src');
+        preview.each(function (index, value) {
+            if (images.length > 0) {
+                var nameImage = images.shift();
+                $(this).attr('src', "images/uploads/" + nameImage)
+                $(this).attr('data-key', nameImage)
+            }
+            else {
+                $(this).removeAttr('src');
+                $(this).removeAttr('data-key');
+            }
+
+        });
+    }
 
 });

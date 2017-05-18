@@ -36,7 +36,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'age', 'height', 'weight', 'city', 'credit', 'english'], 'required'],
+            [['name', 'email', 'age', 'height', 'weight', 'city', 'credit', 'english'], 'required', 'when' => function($model) {
+                return $model->imageFiles != null;}],
             [['age'], 'integer'],
             [['height', 'weight'], 'number'],
             [['credit', 'english'], 'string'],

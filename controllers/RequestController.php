@@ -40,10 +40,15 @@ class RequestController extends \yii\web\Controller
 
     public function  actionUploadImages(){
         $model = new UploadForm();
-        if(\Yii::$app->request->isPjax && $model->load(\Yii::$app->request->post())){
+        if($model->load(\Yii::$app->request->post())){
             $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
             return $model->upload();
         }
+    }
+
+    public function actionDeleteImage($name){
+        unlink('images/uploads/'.$name);
+        return true;
     }
 
 }

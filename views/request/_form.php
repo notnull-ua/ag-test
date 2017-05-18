@@ -77,13 +77,22 @@ use yii\bootstrap\ActiveForm;
     <div class="row">
         <div class="col-xs-12">
 
-            <? //= $form->field($model,'photos')->hiddenInput() ?>
-            <?= $form->field($model, 'imageFiles[]', ['horizontalCssClasses' => [
+            <?= $form->field($model,'photos',['options' =>['style'=>'display:none']])->hiddenInput()->label(false) ?>
+            <?= $form->field(new \app\models\UploadForm(), 'imageFiles[]',
+                ['template'=>'{label}{beginWrapper}{input}{endWrapper} <div class="gallery col-md-5">
+<img class="preview">
+<img class="preview">
+<img class="preview">
+<img class="preview">
+<img class="preview">
+</div>{error}',
+                    'horizontalCssClasses' => [
                 'label' => 'col-md-3',
                 'offset' => '',
-                'wrapper' => 'col-md-9',
+                'wrapper' => 'btn btn-default btn-select col-md-4',
             ],
             ])->fileInput(['multiple' => true, 'accept' => 'image/*'])->label("Добавить фото (до 5 шт.)") ?>
+
         </div>
     </div>
 

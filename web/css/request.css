@@ -153,3 +153,9 @@ button[type='submit']:hover{
     left: 48%;
     bottom: 10%;
 }
+img.preview{
+    width: 70px;
+    height: 70px;
+    background-color: gray;
+    border-radius:50% ;
+}
