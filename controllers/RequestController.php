@@ -17,6 +17,11 @@ class RequestController extends \yii\web\Controller
             if ($model->validate()) {
                 $model->upload();
                 $model->save(false);
+                \Yii::$app->mailer->compose('request', ['model' => $model])
+                    ->setTo([$model->email => $model->name])
+                    ->setFrom([\Yii::$app->params['adminEmail'] => 'Administrator'])
+                    ->setSubject("Request")
+                    ->send();
                 \Yii::$app->session->setFlash('success','Запрос успешно отправлен');
                 return $this->render('index',[
                     'model'=>$model
