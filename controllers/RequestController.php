@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Post;
+use app\models\UploadForm;
 use yii\web\UploadedFile;
 
 class RequestController extends \yii\web\Controller
@@ -17,7 +18,7 @@ class RequestController extends \yii\web\Controller
             if ($model->validate()) {
                 $model->upload();
                 $model->save(false);
-                \Yii::$app->mailer->compose('request', ['model' => $model])
+                $status = \Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setTo([$model->email => $model->name])
                     ->setFrom([\Yii::$app->params['adminEmail'] => 'Administrator'])
                     ->setSubject("Request")
@@ -38,14 +39,10 @@ class RequestController extends \yii\web\Controller
     }
 
     public function  actionUploadImages(){
-        $model = new Post();
+        $model = new UploadForm();
         if(\Yii::$app->request->isPjax && $model->load(\Yii::$app->request->post())){
             $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-            if ($model->upload()) {
-                return $this->renderAjax('index',[
-                    'model' => $model
-                ]);
-            }
+            return $model->upload();
         }
     }
 

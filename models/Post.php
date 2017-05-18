@@ -44,7 +44,6 @@ class Post extends \yii\db\ActiveRecord
             [['city'], 'string', 'max' => 60],
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'email', 'message' => 'Не похоже на существующею имейл почту'],
-            [['email'], 'unique'],
             [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 5],
         ];
     }

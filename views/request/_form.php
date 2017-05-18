@@ -10,11 +10,12 @@ use yii\bootstrap\ActiveForm;
 <div class="request-_form">
 
     <?php $form = ActiveForm::begin([
-        'options' => ['enctype' => 'multipart/form-data'],
+        'options' => ['enctype' => 'multipart/form-data',
+            'data' => ['pjax' => true]],
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [
-                'label' => '',
+                'label' => 'col-md-3',
                 'offset' => '',
                 'wrapper' => 'col-md-12',
             ],
@@ -44,18 +45,48 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'city')->textInput(['placeholder' => 'Город проживания'])->label(false) ?>
         </div>
     </div>
-    <?= $form->field($model, 'credit')->radioList([1 => 'нет', 2 => 'да, только камера', 3 => 'да, комп\'ютер и камера'],['inline'=> true,'inlineRadioListTemplate' => '{input}<div></div>'])->label("Нужна ли техника в оренду") ?>
-    <?php
-    $english = [];
-    $english[1] = 'без знания';
-    $english[2] = 'базовый';
-    $english[3] = 'средний';
-    $english[4] = 'высокий';
-    $english[5] = 'превосходный';
-    echo $form->field($model, 'english')->radioList($english)->label("Знание английского");
-    ?>
-    <? //= $form->field($model,'photos')->hiddenInput() ?>
-    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label("Добавить фото (до 5 шт.)") ?>
+    <div class="row">
+        <div class="col-xs-12">
+            <?= $form->field($model, 'credit', ['horizontalCssClasses' => [
+                'label' => 'col-md-3',
+                'offset' => '',
+                'wrapper' => 'col-md-9',
+            ],
+            ])->radioList([1 => 'нет', 2 => 'да, только камера', 3 => 'да, комп\'ютер и камера'], ['inline' => true, 'inlineRadioListTemplate' => '{input}<div></div>'])->label("Нужна ли техника в оренду") ?>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <?php
+            $english = [];
+            $english[1] = 'без знания';
+            $english[2] = 'базовый';
+            $english[3] = 'средний';
+            $english[4] = 'высокий';
+            $english[5] = 'превосходный';
+            echo $form->field($model, 'english', ['horizontalCssClasses' => [
+                'label' => 'col-md-3',
+                'offset' => '',
+                'wrapper' => 'col-md-9',
+            ],
+            ])->radioList($english)->label("Знание английского");
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <? //= $form->field($model,'photos')->hiddenInput() ?>
+            <?= $form->field($model, 'imageFiles[]', ['horizontalCssClasses' => [
+                'label' => 'col-md-3',
+                'offset' => '',
+                'wrapper' => 'col-md-9',
+            ],
+            ])->fileInput(['multiple' => true, 'accept' => 'image/*'])->label("Добавить фото (до 5 шт.)") ?>
+        </div>
+    </div>
+
 
     <div class="form-group submit-wrapper">
         <?= Html::submitButton('Отправить', ['class' => 'btn btn-warning']) ?>

@@ -15,7 +15,7 @@ class m170516_135036_create_post_table extends Migration
         $this->createTable('post', [
             'id' => $this->primaryKey(),
             'name' => $this->string(30)->notNull(),
-            'email' => $this->string(30)->unique()->notNull(),
+            'email' => $this->string(30)->notNull(),
             'age' => $this->integer()->unsigned()->notNull(),
             'height' => $this->float()->unsigned()->notNull(),
             'weight' => $this->float()->unsigned()->notNull(),

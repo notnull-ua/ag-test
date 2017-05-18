@@ -4,7 +4,7 @@
 ?>
 
 <?php
-\yii\widgets\Pjax::begin();
+
 echo \app\widgets\Alert::widget();
 ?>
 <div class="content-header">
@@ -14,10 +14,10 @@ echo \app\widgets\Alert::widget();
 </div>
 
 <?php
-
+//\yii\widgets\Pjax::begin();
 echo $this->render('_form',[
         'model'=>$model
 ]);
 
-\yii\widgets\Pjax::end();
+//\yii\widgets\Pjax::end();
 ?>
