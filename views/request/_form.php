@@ -44,9 +44,7 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'city')->textInput(['placeholder' => 'Город проживания'])->label(false) ?>
         </div>
     </div>
-
-
-    <?= $form->field($model, 'credit')->radioList([1 => 'нет', 2 => 'да, только камера', 3 => 'да, комп\'тер и камера']) ->label("Нужна ли техника в оренду") ?>
+    <?= $form->field($model, 'credit')->radioList([1 => 'нет', 2 => 'да, только камера', 3 => 'да, комп\'ютер и камера'],['inline'=> true,'inlineRadioListTemplate' => '{input}<div></div>'])->label("Нужна ли техника в оренду") ?>
     <?php
     $english = [];
     $english[1] = 'без знания';
@@ -56,11 +54,11 @@ use yii\bootstrap\ActiveForm;
     $english[5] = 'превосходный';
     echo $form->field($model, 'english')->radioList($english)->label("Знание английского");
     ?>
-    <?//= $form->field($model,'photos')->hiddenInput() ?>
-    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true,'accept' => 'image/*'])->label("Добавить фото (до 5 шт.)") ?>
+    <? //= $form->field($model,'photos')->hiddenInput() ?>
+    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label("Добавить фото (до 5 шт.)") ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
+    <div class="form-group submit-wrapper">
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-warning']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 
