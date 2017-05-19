@@ -205,6 +205,8 @@ img.preview{
     height: 70px;
     background-color: gray;
     border-radius:50% ;
+    background: url("../images/holder.jpg") no-repeat center;
+    background-size: cover;
 }
 span.label{
     color: #000;

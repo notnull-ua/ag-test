@@ -12,7 +12,7 @@ $().ready(function () {
         event.preventDefault();
         var data = new FormData($(this).parents('form')[0]);
         $.ajax({
-            url: '../request/upload-images',
+            url: './request/upload-images',
             type: 'POST',
             data: data,
             cache: false,
@@ -52,7 +52,6 @@ $().ready(function () {
 
 
                 });
-            alert("Delete " + item.attr('data-key'));
         }
     });
 
@@ -62,8 +61,8 @@ $().ready(function () {
         preview.each(function (index, value) {
             if (images.length > 0) {
                 var nameImage = images.shift();
-                $(this).attr('src', "images/uploads/" + nameImage)
-                $(this).attr('data-key', nameImage)
+                $(this).attr('src', "images/uploads/" + nameImage);
+                $(this).attr('data-key', nameImage);
             }
             else {
                 $(this).removeAttr('src');
