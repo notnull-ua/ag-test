@@ -14,11 +14,11 @@ class RequestController extends \yii\web\Controller
         $model = new \app\models\Post();
 
         if ($model->load(\Yii::$app->request->post())) {
-            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+            //$model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
             if ($model->validate()) {
-                $model->upload();
+                //$model->upload();
                 $model->save(false);
-                $status = \Yii::$app->mailer->compose('request', ['model' => $model])
+                \Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setTo([$model->email => $model->name])
                     ->setFrom([\Yii::$app->params['adminEmail'] => 'Administrator'])
                     ->setSubject("Request")
@@ -47,7 +47,7 @@ class RequestController extends \yii\web\Controller
     }
 
     public function actionDeleteImage($name){
-        unlink('images/uploads/'.$name);
+        unlink('../images/uploads/'.$name);
         return true;
     }
 

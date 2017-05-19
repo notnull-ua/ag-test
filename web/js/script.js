@@ -4,21 +4,15 @@
 
 $().ready(function () {
     $('.radio').on('change', 'input[type="radio"]', function () {
-        console.log($(this).parents('.form-group'));
         $(this).parents('.form-group').find('label').removeClass('checked');
         $(this).parent('label').addClass('checked');
     });
     console.log($('form'));
-    $('form').on('submit', function () {
+    $('.select-image').on('change', function () {
         event.preventDefault();
-        var data = new FormData(this);
-        //data.append(this.name,this.files);
-        // $.each( this.files, function( key, value ){
-        //     data.append(key, value );
-        // });
-
+        var data = new FormData($(this).parents('form')[0]);
         $.ajax({
-            url: './request/upload-images',
+            url: '../request/upload-images',
             type: 'POST',
             data: data,
             cache: false,

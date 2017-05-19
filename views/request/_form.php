@@ -77,9 +77,13 @@ use yii\bootstrap\ActiveForm;
     <div class="row">
         <div class="col-xs-12">
 
-            <?= $form->field($model,'photos',['options' =>['style'=>'display:none']])->hiddenInput()->label(false) ?>
+            <?= $form->field($model, 'photos', ['options' => ['style' => 'display:none']])->label(false) ?>
+
             <?= $form->field(new \app\models\UploadForm(), 'imageFiles[]',
-                ['template'=>'{label}{beginWrapper}{input}{endWrapper} <div class="gallery col-md-5">
+                ['template' => '
+<span class="label col-md-3 ">Добавить фото (до 5 шт.)</span>
+{beginWrapper}{beginLabel}{labelTitle}{input}{endLabel}{endWrapper} 
+<div class="gallery col-md-6">
 <img class="preview">
 <img class="preview">
 <img class="preview">
@@ -87,11 +91,11 @@ use yii\bootstrap\ActiveForm;
 <img class="preview">
 </div>{error}',
                     'horizontalCssClasses' => [
-                'label' => 'col-md-3',
-                'offset' => '',
-                'wrapper' => 'btn btn-default btn-select col-md-4',
-            ],
-            ])->fileInput(['multiple' => true, 'accept' => 'image/*'])->label("Добавить фото (до 5 шт.)") ?>
+                        'label' => 'col-md-3',
+                        'offset' => '',
+                        'wrapper' => 'col-md-3',
+                    ],
+                ])->fileInput(['style' => 'display:none','class'=>'select-image', 'multiple' => true, 'accept' => 'image/*'])->label('ЗАГРУЗИТЬ', ['class' => 'btn btn-warning btn-load glyphicon glyphicon-plus'])//label("Добавить фото (до 5 шт.)")   ?>
 
         </div>
     </div>
