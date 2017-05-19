@@ -47,7 +47,7 @@ class RequestController extends \yii\web\Controller
     }
 
     public function actionDeleteImage($name){
-        unlink('../images/uploads/'.$name);
+        unlink('images/uploads/' . $name);
         return true;
     }
 

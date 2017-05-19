@@ -97,6 +97,53 @@ form .city-wrapper:before {
     top:5px;
     z-index: 1;
 }
+
+form .credit-wrapper:before {
+    content: ' ';
+    background: url("../images/credit.jpg") no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height: 27px;
+    top: 7px;
+    display: block;
+    z-index: 1;
+    position: absolute;
+}
+
+form .english-wrapper:before {
+    content: ' ';
+    background: url("../images/english.jpg") no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height: 27px;
+    top: 7px;
+    display: block;
+    z-index: 1;
+    position: absolute;
+}
+
+form .image-wrapper .label {
+    text-align: left;
+    padding-left: 50px;
+}
+
+form .image-wrapper .label:before {
+    content: ' ';
+    background: url("../images/photo.jpg") no-repeat;
+    background-size: 100%;
+    width: 21px;
+    height: 27px;
+    top: 5px;
+    left: 15px;
+    display: block;
+    z-index: 1;
+    position: absolute;
+}
+
+.credit-wrapper .control-label, .english-wrapper .control-label {
+    text-align: left;
+    padding-left: 50px;
+}
 form input[type='text']:focus{
     background: #fff7f7;
     border-color: #843534;
@@ -177,3 +224,4 @@ span.label{
 .btn-load:before{
     margin-right: 10px;
 }
+

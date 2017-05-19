@@ -46,7 +46,7 @@ use yii\bootstrap\ActiveForm;
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 credit-wrapper ">
             <?= $form->field($model, 'credit', ['horizontalCssClasses' => [
                 'label' => 'col-md-3',
                 'offset' => '',
@@ -57,7 +57,7 @@ use yii\bootstrap\ActiveForm;
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 english-wrapper">
             <?php
             $english = [];
             $english[1] = 'без знания';
@@ -75,7 +75,7 @@ use yii\bootstrap\ActiveForm;
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 image-wrapper">
 
             <?= $form->field($model, 'photos', ['options' => ['style' => 'display:none']])->label(false) ?>
 
