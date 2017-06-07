@@ -28,7 +28,7 @@ class UploadForm extends Model
                 $images[] = $file->baseName . '.' . $file->extension;
             }
         }
-        return implode('|', $images);
+        return $images;
 
     }
 }
