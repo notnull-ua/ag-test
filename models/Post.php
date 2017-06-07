@@ -41,6 +41,8 @@ class Post extends \yii\db\ActiveRecord
             [['age'], 'integer'],
             [['height', 'weight'], 'number'],
             [['credit', 'english'], 'string'],
+            ['credit','in','range' => self::getCreditPlaceholders()],
+            ['english','in','range' => self::getEnglishPlaceholders()],
             [['name', 'email'], 'string', 'max' => 30],
             [['city'], 'string', 'max' => 60],
             ['email', 'filter', 'filter' => 'trim'],
@@ -81,5 +83,29 @@ class Post extends \yii\db\ActiveRecord
         }
         else return false;
 
+    }
+
+    static function getEnglishPlaceholders(){
+
+        $array =  [
+            'без знания',
+            'базовый',
+            'средний',
+            'высокий',
+            'превосходный'
+        ];
+
+        return array_combine($array,$array);
+    }
+
+    static function getCreditPlaceholders(){
+        $array =  [
+           'нет',
+            'да, только камера',
+            'да, комп\'ютер и камера'
+        ];
+
+        // значення в якості ключа, для того щоб значення з форми приймалось в ENUM
+        return array_combine($array,$array);
     }
 }

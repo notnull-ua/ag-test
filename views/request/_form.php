@@ -52,25 +52,20 @@ use yii\bootstrap\ActiveForm;
                 'offset' => '',
                 'wrapper' => 'col-md-9',
             ],
-            ])->radioList([1 => 'нет', 2 => 'да, только камера', 3 => 'да, комп\'ютер и камера'], ['inline' => true, 'inlineRadioListTemplate' => '{input}<div></div>'])->label("Нужна ли техника в оренду") ?>
+            ])->radioList($model::getCreditPlaceholders(), ['inline' => true, 'inlineRadioListTemplate' => '{input}<div></div>'])->label("Нужна ли техника в оренду") ?>
 
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 english-wrapper">
             <?php
-            $english = [];
-            $english[1] = 'без знания';
-            $english[2] = 'базовый';
-            $english[3] = 'средний';
-            $english[4] = 'высокий';
-            $english[5] = 'превосходный';
+
             echo $form->field($model, 'english', ['horizontalCssClasses' => [
                 'label' => 'col-md-3',
                 'offset' => '',
                 'wrapper' => 'col-md-9',
             ],
-            ])->radioList($english)->label("Знание английского");
+            ])->radioList($model::getEnglishPlaceholders())->label("Знание английского");
             ?>
         </div>
     </div>
