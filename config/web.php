@@ -58,6 +58,7 @@ $config = [
         ],
 
     ],
+    'defaultRoute' => 'request',
     'params' => $params,
 ];
 

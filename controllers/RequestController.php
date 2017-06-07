@@ -24,9 +24,7 @@ class RequestController extends \yii\web\Controller
                     ->setSubject("Request")
                     ->send();
                 \Yii::$app->session->setFlash('success','Запрос успешно отправлен');
-                return $this->render('index',[
-                    'model'=>$model
-                ]);
+                return $this->redirect('/');
             }
             else {
                 \Yii::$app->session->setFlash('error','Ошибка при отправлении запроса. Проверьте данные и повторите попытку');
