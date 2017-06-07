@@ -23,7 +23,7 @@ $().ready(function () {
                 if (typeof respond.error === 'undefined') {
 
                     $('#post-photos').val(respond);
-                    var images = parseJSON(respond);
+                    var images = JSON.parse(respond);
                     updatePreview(images);
 
                 }
@@ -42,9 +42,11 @@ $().ready(function () {
         if (item.attr('data-key') != undefined) {
             $.get('./request/delete-image', {name: item.attr('data-key')})
                 .done(function (data) {
+                    //todo: переробити щоб парсилась стпрока в масив
                     var images = $('#post-photos').val().split('|'); //get images from hidden input
                     images.splice(images.indexOf(item.attr('data-key'))); // delete image from array images
                     updatePreview(images); //update preview
+                    //todo: змінити щоб був масив індексів фото
                     var imageString = images.join('|');
                     $('#post-photos').val(imageString); //set new value to hidden input
 
@@ -55,13 +57,13 @@ $().ready(function () {
         }
     });
 
-    // todo: Пофіксити завантаження файлу
+    // todo: перебрати єлементи об'єкту
     function updatePreview(images) {
         var preview = $('.preview');
         preview.removeAttr('src');
         preview.each(function (index, value) {
-            if (images.length > 0) {
-                var itemImage = images.shift();
+            if (Object.keys(images).length > 0) {
+                var itemImage = images.shift(); //тут трабла, немає такого для об'єкту
                 $(this).attr('src', "images/uploads/" + itemImage);
                 $(this).attr('data-key', nameImage);
             }
