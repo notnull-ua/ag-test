@@ -23,7 +23,7 @@ $().ready(function () {
                 if (typeof respond.error === 'undefined') {
 
                     $('#post-photos').val(respond);
-                    var images = respond.split('|');
+                    var images = parseJSON(respond);
                     updatePreview(images);
 
                 }
@@ -55,13 +55,14 @@ $().ready(function () {
         }
     });
 
+    // todo: Пофіксити завантаження файлу
     function updatePreview(images) {
         var preview = $('.preview');
         preview.removeAttr('src');
         preview.each(function (index, value) {
             if (images.length > 0) {
-                var nameImage = images.shift();
-                $(this).attr('src', "images/uploads/" + nameImage);
+                var itemImage = images.shift();
+                $(this).attr('src', "images/uploads/" + itemImage);
                 $(this).attr('data-key', nameImage);
             }
             else {

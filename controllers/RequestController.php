@@ -40,7 +40,8 @@ class RequestController extends \yii\web\Controller
         $model = new UploadForm();
         if($model->load(\Yii::$app->request->post())){
             $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-            return $model->upload();
+            return json_encode($model->upload());
+
         }
     }
 

@@ -21,6 +21,7 @@ use Yii;
 class Post extends \yii\db\ActiveRecord
 {
     public $imageFiles;
+    public $photos;
 
     /**
      * @inheritdoc
@@ -71,7 +72,7 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
-    public function upload(){
+    /*public function upload(){
         $images = [];
         if($this->validate(['imageFiles'])){
             foreach ($this->imageFiles as $file) {
@@ -83,7 +84,7 @@ class Post extends \yii\db\ActiveRecord
         }
         else return false;
 
-    }
+    }*/
 
     static function getEnglishPlaceholders(){
 
