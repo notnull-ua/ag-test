@@ -36,7 +36,6 @@ $().ready(function () {
             }
         });
     });
-
     $('.gallery').on('click', '.preview', function () {
         var item = $(this);
         if (item.attr('data-key') != undefined) {
@@ -47,8 +46,6 @@ $().ready(function () {
                     updatePreview(images); //update preview
                     var imageArray = JSON.stringify(images);
                     $('#post-photos').val(imageArray); //set new value to hidden input
-
-
 
 
                 });

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Image;
 use app\models\Post;
 use app\models\UploadForm;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 class RequestController extends \yii\web\Controller
@@ -38,7 +39,7 @@ class RequestController extends \yii\web\Controller
 //                }
                 $message->send();
                 \Yii::$app->session->setFlash('success','Запрос успешно отправлен');
-                return $this->redirect('/');
+                return $this->refresh();
             }
             else {
                 \Yii::$app->session->setFlash('error','Ошибка при отправлении запроса. Проверьте данные и повторите попытку');
