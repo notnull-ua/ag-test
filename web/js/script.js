@@ -61,7 +61,7 @@ $().ready(function () {
         preview.each(function (index, value) {
             console.log(Object.keys(images).length);
             if (Object.keys(images).length > 0) {
-                var imageValue = images[Object.keys(images)[0]];
+                var imageValue = images[Object.keys(images)[0]]; //get first property
                 var imageKey = Object.keys(images)[0];
                 delete images[imageKey];
 
