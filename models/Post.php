@@ -109,4 +109,12 @@ class Post extends \yii\db\ActiveRecord
         // значення в якості ключа, для того щоб значення з форми приймалось в ENUM
         return array_combine($array,$array);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['id_post' => 'id']);
+    }
 }

@@ -40,15 +40,13 @@ $().ready(function () {
     $('.gallery').on('click', '.preview', function () {
         var item = $(this);
         if (item.attr('data-key') != undefined) {
-            $.get('./request/delete-image', {name: item.attr('data-key')})
+            $.get('./request/delete-image', {id: item.attr('data-key')})
                 .done(function (data) {
-                    //todo: переробити щоб парсилась стпрока в масив
-                    var images = $('#post-photos').val().split('|'); //get images from hidden input
-                    images.splice(images.indexOf(item.attr('data-key'))); // delete image from array images
+                    var images = JSON.parse($('#post-photos').val()); //get images from hidden input
+                    delete images[item.attr('data-key')]; // delete image from array images
                     updatePreview(images); //update preview
-                    //todo: змінити щоб був масив індексів фото
-                    var imageString = images.join('|');
-                    $('#post-photos').val(imageString); //set new value to hidden input
+                    var imageArray = JSON.stringify(images);
+                    $('#post-photos').val(imageArray); //set new value to hidden input
 
 
 
@@ -57,15 +55,18 @@ $().ready(function () {
         }
     });
 
-    // todo: перебрати єлементи об'єкту
     function updatePreview(images) {
         var preview = $('.preview');
         preview.removeAttr('src');
         preview.each(function (index, value) {
+            console.log(Object.keys(images).length);
             if (Object.keys(images).length > 0) {
-                var itemImage = images.shift(); //тут трабла, немає такого для об'єкту
-                $(this).attr('src', "images/uploads/" + itemImage);
-                $(this).attr('data-key', nameImage);
+                var imageValue = images[Object.keys(images)[0]];
+                var imageKey = Object.keys(images)[0];
+                delete images[imageKey];
+
+                $(this).attr('src', "images/uploads/" + imageValue);
+                $(this).attr('data-key', imageKey);
             }
             else {
                 $(this).removeAttr('src');

@@ -14,10 +14,12 @@ use yii\helpers\Html;
 <p>Нужна техника в аренду: <?=$model->credit?></p>
 <p>Знание английского: <?=$model->english?></p>
     <?php
-    $images = explode('|',$model->photos);
+    /* @var $images array Image*/
+    $images = $model->getImages()->all();
 
     foreach ($images as $image){
-        echo Html::img($message->embed(\Yii::$app->urlManager->createAbsoluteUrl(['images/uploads/'.$image])));
+        /* @var $image \app\models\Image*/
+        echo Html::img($message->embed(\Yii::$app->urlManager->createAbsoluteUrl(['images/uploads/'.$image->name])));
     }
     ?>
 </div>
