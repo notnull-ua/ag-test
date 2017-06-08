@@ -24,7 +24,9 @@ class UploadForm extends Model
         $images = [];
         if ($this->validate(['imageFiles'])) {
             foreach ($this->imageFiles as $file) {
-                $file->saveAs('./images/uploads/' . $file->baseName . '.' . $file->extension);
+                $filename = './images/uploads/' . $file->baseName . '.' . $file->extension;
+                $file->saveAs($filename);
+                chmod($filename, 777);
                 $model= new Image();
                 $model->name = $file->baseName . '.' . $file->extension;
                 $model->save();
